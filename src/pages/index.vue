@@ -9,7 +9,7 @@ import crypto_, { useCryptoStore } from '../store/crypto'
 // import crypto_ from '../store/user'
 
 const defineStore = useCryptoStore()
-const { mint, connectWallet, withdraw } = useCryptoStore()
+const { mint, connectWallet, withdraw, isOwner } = useCryptoStore()
 const { account } = storeToRefs(defineStore)
 
 const amountInput = ref(null as any)
@@ -53,7 +53,7 @@ const amountInput = ref(null as any)
       </button>
     </div>
 
-    <div v-if="crypto_.straccount = crypto_.Onlyowner" class="border shadow w-4/12 p-4 mt-10">
+    <div v-if="account && crypto_.straccount == crypto_.Onlyowner" class="border shadow w-4/12 p-4 mt-10">
       <button class="bg-cyan-500 rounded p-4 mt-10" @click="withdraw()">
         提領餘額
       </button>
