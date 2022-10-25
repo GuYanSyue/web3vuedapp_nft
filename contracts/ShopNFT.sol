@@ -97,7 +97,7 @@ contract ShopNFT is ERC721Enumerable, Ownable{
         paused = !paused;
     }
 
-    function withdraw(address _to) public onlyOwner(){
+    function withdraw(address _to) payable public onlyOwner(){
         require(Owner == _to);
         payable(_to).transfer(address(this).balance);
     }

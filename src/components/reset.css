@@ -17,3 +17,10 @@
     width: 80%; 
     margin: 0 auto;
 }
+.MsoNormal{
+    font-family: DFkai-sb, sans-serif;
+    font-size: 16px;
+    /*color: darkblue;*/
+    float: left;
+    white-space: pre-wrap;
+}
