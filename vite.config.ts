@@ -22,6 +22,8 @@ export default defineConfig({
     },
   },
 
+  base: '/web3vuedapp_nft/',
+
   plugins: [
     Preview(),
 
