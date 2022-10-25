@@ -21,12 +21,8 @@ const amountInput = ref(null as any)
       Get NFT !
     </h1>
     <div v-if="!account">
-      <P class="MsoNormal">
-        ～。酸辣麵NFT。～
-      </P>
-      <P class="MsoNormal">
-        點擊下方橙色按鈕連結錢包購買NFT
-      </P><br>
+      <P class="MsoNormal">～。酸辣麵NFT。～</P>
+      <P class="MsoNormal">點擊下方橙色按鈕連結錢包購買NFT</P><br>
       <p>Only for Metamask --Goerli network.</p>
     </div>
     <button v-if="!account" class="bg-amber-600 rounded p-4" @click="connectWallet">
