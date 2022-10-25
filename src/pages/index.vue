@@ -1,56 +1,42 @@
 <script setup lang="ts">
-const user = useUserStore()
-const name = $ref(user.savedName)
+import { storeToRefs } from 'pinia'
+import { ref } from 'vue'
+import { useCryptoStore } from '../store/crypto'
 
-const router = useRouter()
-const go = () => {
-  if (name)
-    router.push(`/hi/${encodeURIComponent(name)}`)
-}
+// 引用crypto.vue的const宣告變數
+// import crypto_ from '../store/user'
 
-const { t } = useI18n()
+const defineStore = useCryptoStore()
+const { mint, connectWallet } = useCryptoStore()
+const { account } = storeToRefs(defineStore)
+
+const amountInput = ref(null as any)
 </script>
 
 <template>
-  <div>
-    <div text-4xl>
-      <div i-carbon-campsite inline-block />
-    </div>
-    <p>
-      <a rel="noreferrer" href="https://github.com/antfu/vitesse" target="_blank">
-        Vitesse
-      </a>
-    </p>
-    <p>
-      <em text-sm opacity-75>{{ t('intro.desc') }}</em>
-    </p>
+  <div class="flex flex-col items-center">
+    <h1 class="text-2xl m-4">
+      Get NFT !
+    </h1>
+    <button v-if="!account" class="bg-amber-600 rounded p-4" @click="connectWallet">
+      Connect Wallet
+    </button>
 
-    <div py-4 />
+    <div v-if="account" class="border shadow w-4/12 p-4 mt-10">
+      <p class="tit1"><span class="hide">～～．</span>酸辣粉 NFT<span class="hide">．～～</span></p><br>
+      <img src="../assets/Noodle.jpg" class="img-mid border shadow p-1">
 
-    <input
-      id="input"
-      v-model="name"
-      :placeholder="t('intro.whats-your-name')"
-      :aria-label="t('intro.whats-your-name')"
-      type="text"
-      autocomplete="false"
-      p="x4 y2"
-      w="250px"
-      text="center"
-      bg="transparent"
-      border="~ rounded gray-200 dark:gray-700"
-      outline="none active:none"
-      @keydown.enter="go"
-    >
-    <label class="hidden" for="input">{{ t('intro.whats-your-name') }}</label>
-
-    <div>
-      <button
-        btn m-3 text-sm
-        :disabled="!name"
-        @click="go"
+      <br><span>你想鑄造多少？（最大：3）&emsp;</span><br>
+      <input
+        v-model.number="amountInput"
+        type="number"
+        :style="{ width: '100px' }"
+        name="NFTBookInfo"
+        class="py-4 px-4 shadow border rounded"
+        maxlength="2"
       >
-        {{ t('button.go') }}
+      <button class="bg-cyan-500 rounded p-4 mt-10" @click="mint(amountInput)">
+        Mint
       </button>
     </div>
   </div>
