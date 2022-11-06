@@ -5,22 +5,27 @@ import { acceptHMRUpdate, defineStore } from 'pinia'
 
 // import { ref } from 'vue'
 import contractABI from '../artifacts/contracts/ShopNFT.sol/ShopNFT.json'
-const contractAddress = '0xA6D3d008C0cFDd03378E4De77e692CFAE60120e1'
-const Onlyowner = '0xc98E9c69119eb0B764B0d5DCbC1532De8bfC2D4f'
-const straccount = ref('0x')
-const strowner = ref('0x')
+const contractAddress = '0x229952d9F287f797C32A08E493Cba7231B9Ea648'
+const Onlyowner = '0xc98e9c69119eb0b764b0d5dcbc1532de8bfc2d4f'
 
 // const Sig: number | ethers.utils.BytesLike | ethers.utils.Hexable = []
 const Sig = ref('0x')
 // 預設匯出 !重要
 export default {
-  Sig, Onlyowner, straccount, strowner,
+  Sig, Onlyowner,
 }
 
 export const useCryptoStore = defineStore('user', () => {
   const account = ref(null)
   const loading = ref(false)
   const Amount = ref(0)
+  const showURI = ref(null)
+  const showCost = ref(null)
+  const showMaxMintAmount = ref(null)
+  const showMaxSupply = ref(null)
+  const showPaused = ref(null)
+  const showTokenIds = ref(null)
+  const showTokenURI = ref(null)
 
   async function getBalance() {
     setLoader(true)
@@ -88,11 +93,11 @@ export const useCryptoStore = defineStore('user', () => {
         const ShopPortalContract = new ethers.Contract(contractAddress, contractABI.abi, signer)
 
         // 呼叫合約函數
-        const mintTxn = await ShopPortalContract.withdraw(account)
+        const mintTxn = await ShopPortalContract.withdraw(Onlyowner)
 
-        console.log('Mining....', mintTxn.hash)
+        console.log('Running....', mintTxn.hash)
         await mintTxn.wait()
-        console.log('Mined -- ', mintTxn.hash)
+        console.log('Withdraw -- ', mintTxn.hash)
       }
       else {
         console.log('Ethereum object doesn\'t exist!')
@@ -104,7 +109,7 @@ export const useCryptoStore = defineStore('user', () => {
     }
   }
 
-  async function isOwner() {
+  async function walletOfOwner() {
     console.log('setting loader')
     setLoader(true)
     try {
@@ -115,12 +120,185 @@ export const useCryptoStore = defineStore('user', () => {
         const ShopPortalContract = new ethers.Contract(contractAddress, contractABI.abi, signer)
 
         // 呼叫合約函數
-        const mintTxn = await ShopPortalContract.Owner()
-        strowner.value = mintTxn.value
+        const mintTxn = await ShopPortalContract.walletOfOwner(account)
+        showTokenIds.value = mintTxn
 
-        console.log('Mining....', mintTxn.hash)
+        console.log('Setting....', mintTxn.hash)
         await mintTxn.wait()
-        console.log('Mined -- ', mintTxn.hash)
+        console.log('Set -- ', mintTxn.hash)
+      }
+      else {
+        console.log('Ethereum object doesn\'t exist!')
+      }
+    }
+    catch (error) {
+      setLoader(false)
+      console.log(error)
+    }
+  }
+
+  async function tokenURI(tokenId: any) {
+    console.log('setting loader')
+    setLoader(true)
+    try {
+      const { ethereum } = window
+      if (ethereum) {
+        const provider = new ethers.providers.Web3Provider(ethereum)
+        const signer = provider.getSigner() // 持有使用者的私鑰並以此簽核 (Signer)
+        const ShopPortalContract = new ethers.Contract(contractAddress, contractABI.abi, signer)
+
+        // 呼叫合約函數
+        const mintTxn = await ShopPortalContract.tokenURI(tokenId)
+        showTokenURI.value = mintTxn
+
+        console.log('Setting....', mintTxn.hash)
+        await mintTxn.wait()
+        console.log('Set -- ', mintTxn.hash)
+      }
+      else {
+        console.log('Ethereum object doesn\'t exist!')
+      }
+    }
+    catch (error) {
+      setLoader(false)
+      console.log(error)
+    }
+  }
+
+  async function pause() {
+    console.log('setting loader')
+    setLoader(true)
+    try {
+      const { ethereum } = window
+      if (ethereum) {
+        const provider = new ethers.providers.Web3Provider(ethereum)
+        const signer = provider.getSigner() // 持有使用者的私鑰並以此簽核 (Signer)
+        const ShopPortalContract = new ethers.Contract(contractAddress, contractABI.abi, signer)
+
+        // 呼叫合約函數
+        const mintTxn = await ShopPortalContract.pause()
+        showPaused.value = (await ShopPortalContract.paused())
+
+        console.log('Setting....', mintTxn.hash)
+        await mintTxn.wait()
+        console.log('Set -- ', mintTxn.hash)
+      }
+      else {
+        console.log('Ethereum object doesn\'t exist!')
+      }
+    }
+    catch (error) {
+      setLoader(false)
+      console.log(error)
+    }
+  }
+
+  // ------------------------------------------------------
+
+  async function setBaseURI(newURI: any) {
+    console.log('setting loader')
+    setLoader(true)
+    try {
+      const { ethereum } = window
+      if (ethereum) {
+        const provider = new ethers.providers.Web3Provider(ethereum)
+        const signer = provider.getSigner() // 持有使用者的私鑰並以此簽核 (Signer)
+        const ShopPortalContract = new ethers.Contract(contractAddress, contractABI.abi, signer)
+
+        // 呼叫合約函數
+        const mintTxn = await ShopPortalContract.setBaseURI(newURI)
+        showURI.value = (await ShopPortalContract.baseURI())
+
+        console.log('Setting....', mintTxn.hash)
+        await mintTxn.wait()
+        console.log('Set -- ', mintTxn.hash)
+      }
+      else {
+        console.log('Ethereum object doesn\'t exist!')
+      }
+    }
+    catch (error) {
+      setLoader(false)
+      console.log(error)
+    }
+  }
+
+  async function setCost(newCost_ether: any) {
+    console.log('setting loader')
+    setLoader(true)
+    try {
+      const { ethereum } = window
+      if (ethereum) {
+        const provider = new ethers.providers.Web3Provider(ethereum)
+        const signer = provider.getSigner() // 持有使用者的私鑰並以此簽核 (Signer)
+        const ShopPortalContract = new ethers.Contract(contractAddress, contractABI.abi, signer)
+
+        // const newCost_ether = ethers.utils.parseUnits(newCost.toString(), 18)
+        const newCost_wei = newCost_ether * 1e18
+
+        // 呼叫合約函數
+        const mintTxn = await ShopPortalContract.setCost(newCost_wei)
+        showCost.value = (await ShopPortalContract.cost())
+
+        console.log('Setting....', mintTxn.hash)
+        await mintTxn.wait()
+        console.log('Set -- ', mintTxn.hash)
+      }
+      else {
+        console.log('Ethereum object doesn\'t exist!')
+      }
+    }
+    catch (error) {
+      setLoader(false)
+      console.log(error)
+    }
+  }
+
+  async function setmaxMintAmount(maxMintAmount: any) {
+    console.log('setting loader')
+    setLoader(true)
+    try {
+      const { ethereum } = window
+      if (ethereum) {
+        const provider = new ethers.providers.Web3Provider(ethereum)
+        const signer = provider.getSigner() // 持有使用者的私鑰並以此簽核 (Signer)
+        const ShopPortalContract = new ethers.Contract(contractAddress, contractABI.abi, signer)
+
+        // 呼叫合約函數
+        const mintTxn = await ShopPortalContract.setmaxMintAmount(maxMintAmount)
+        showMaxMintAmount.value = (await ShopPortalContract.maxMintAmount())
+
+        console.log('Setting....', mintTxn.hash)
+        await mintTxn.wait()
+        console.log('Set -- ', mintTxn.hash)
+      }
+      else {
+        console.log('Ethereum object doesn\'t exist!')
+      }
+    }
+    catch (error) {
+      setLoader(false)
+      console.log(error)
+    }
+  }
+
+  async function setMaxSupply(maxSupply: any) {
+    console.log('setting loader')
+    setLoader(true)
+    try {
+      const { ethereum } = window
+      if (ethereum) {
+        const provider = new ethers.providers.Web3Provider(ethereum)
+        const signer = provider.getSigner() // 持有使用者的私鑰並以此簽核 (Signer)
+        const ShopPortalContract = new ethers.Contract(contractAddress, contractABI.abi, signer)
+
+        // 呼叫合約函數
+        const mintTxn = await ShopPortalContract.setMaxSupplyt(maxSupply)
+        showMaxSupply.value = (await ShopPortalContract.setMaxSupply())
+
+        console.log('Setting....', mintTxn.hash)
+        await mintTxn.wait()
+        console.log('Set -- ', mintTxn.hash)
       }
       else {
         console.log('Ethereum object doesn\'t exist!')
@@ -148,8 +326,6 @@ export const useCryptoStore = defineStore('user', () => {
       console.log('Connected: ', myAccounts[0])
       account.value = myAccounts[0]
 
-      straccount.value = myAccounts[0]
-
       await getBalance()
     }
     catch (error) {
@@ -172,11 +348,22 @@ export const useCryptoStore = defineStore('user', () => {
     Amount,
     Sig,
     Onlyowner,
-    straccount,
-    strowner,
+    showURI,
+    showCost,
+    showMaxMintAmount,
+    showMaxSupply,
+    showPaused,
+    showTokenIds,
+    showTokenURI,
     mint,
     withdraw,
-    isOwner,
+    walletOfOwner,
+    tokenURI,
+    pause,
+    setBaseURI,
+    setCost,
+    setmaxMintAmount,
+    setMaxSupply,
   }
 })
 

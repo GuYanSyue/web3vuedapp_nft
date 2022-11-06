@@ -9,10 +9,13 @@ import crypto_, { useCryptoStore } from '../store/crypto'
 // import crypto_ from '../store/user'
 
 const defineStore = useCryptoStore()
-const { mint, connectWallet, withdraw, isOwner } = useCryptoStore()
+const { mint, connectWallet, withdraw, pause, setmaxMintAmount, setCost, setMaxSupply } = useCryptoStore()
 const { account } = storeToRefs(defineStore)
 
 const amountInput = ref(null as any)
+const newCost_ether = ref(null as any)
+const maxMintAmount = ref(null as any)
+const maxSupply = ref(null as any)
 </script>
 
 <template>
@@ -21,38 +24,91 @@ const amountInput = ref(null as any)
       Get NFT !
     </h1>
     <div v-if="!account">
-      <P class="MsoNormal">～。酸辣麵NFT。～</P>
-      <P class="MsoNormal">點擊下方橙色按鈕連結錢包購買NFT</P><br>
+      <P class="MsoNormal">
+        ～。酸辣粉 NFT。～
+      </P>
+      <P class="MsoNormal">
+        點擊下方橙色按鈕連結錢包購買NFT
+      </P><br>
       <p>Only for Metamask --Goerli network.</p>
     </div>
     <button v-if="!account" class="bg-amber-600 rounded p-4" @click="connectWallet">
       Connect Wallet
     </button>
 
-    <div v-if="account" class="border shadow w-4/12 p-4 mt-10">
-      <p class="tit1">
-        <span class="hide">～～．</span>酸辣粉 NFT<span class="hide">．～～</span>
-      </p><br>
+    <div v-if="account" class="border shadow w-4/12 p-10 mt-10">
       <img src="../assets/Noodle.jpg" class="img-mid border shadow p-1">
 
-      <br><span>你想鑄造多少？（最大：3）&emsp;</span><br>
-      <input
-        v-model.number="amountInput"
-        type="number"
-        :style="{ width: '100px' }"
-        name="NFTBookInfo"
-        class="py-4 px-4 shadow border rounded"
-        maxlength="2"
-      >
-      <button class="bg-cyan-500 rounded p-4 mt-10" @click="mint(amountInput)">
-        Mint
-      </button>
+      <div class="box">
+        <p class="tit1">
+          <br>酸辣粉 NFT<br>
+        </p>
+        <p>剩餘數量: </p>
+        <p>價格: </p>
+
+        <p class="MsoNormal"><br>你想鑄造多少個？（最多：3）&emsp;<br></p>
+        <input
+          v-model.number="amountInput"
+          type="number"
+          :style="{ width: '100%' }"
+          name="NFTBookInfo"
+          class="py-4 px-4 shadow border rounded"
+          maxlength="2"
+        >
+        <button style="border-radius: 25px;" class="w-1/1 bg-emerald-500 rounded p-4 mt-10" @click="mint(amountInput)">
+          Mint
+        </button>
+      </div>
     </div>
 
-    <div v-if="account && crypto_.straccount == crypto_.Onlyowner" class="border shadow w-4/12 p-4 mt-10">
-      <button class="bg-cyan-500 rounded p-4 mt-10" @click="withdraw()">
-        提領餘額
-      </button>
+    <div v-if="account && crypto_.Onlyowner === account" class="border shadow w-4/12 p-4 mt-10">
+      <p style="font-size: 1.5rem;">Hello, owner !</p>
+
+      <div class="box">
+        <button class="w-1/1 bg-orange-500 rounded p-4 mt-10" @click="withdraw()">
+          提領餘額
+        </button><br><p> &emsp;</p>
+        <p class="link-top" /><br>
+
+        <input
+          v-model.number="maxMintAmount"
+          type="number"
+          :style="{ width: '8rem' }"
+          name="newCost_ether"
+          class="py-4 px-4 shadow border rounded"
+          maxlength="10"
+        >
+        <button class="bg-slate-500 rounded p-4 mt-10" @click="setmaxMintAmount(maxMintAmount)">
+          重設一次性鑄造量限制
+        </button>
+
+        <br>
+        <input
+          v-model.number="newCost_ether"
+          :style="{ width: '8rem' }"
+          name="newCost_ether"
+          class="py-4 px-4 shadow border rounded"
+          maxlength="10"
+        >
+        <button class="bg-slate-500 rounded p-4 mt-10" @click="setCost(newCost_ether)">
+          重設價錢
+        </button><br><span>(輸入單位: ether) </span><br>
+
+        <input
+          v-model.number="maxSupply"
+          type="number"
+          :style="{ width: '8rem' }"
+          name="newCost_ether"
+          class="py-4 px-4 shadow border rounded"
+          maxlength="10"
+        >
+        <button class="bg-slate-500 rounded p-4 mt-10" @click="setMaxSupply(maxSupply)">
+          重設NFT總數量
+        </button><br>
+        <button class="bg-red-500 rounded p-4 mt-10" @click="pause()">
+          關閉販賣
+        </button><p> &emsp;</p>
+      </div>
     </div>
   </div>
 </template>

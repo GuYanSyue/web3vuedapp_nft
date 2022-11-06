@@ -12,13 +12,13 @@ contract ShopNFT is ERC721Enumerable, Ownable{
     
     address public Owner = 0xc98E9c69119eb0B764B0d5DCbC1532De8bfC2D4f;
     
-    string public baseURI = "ipfs://QmTsJxtn7ENGWtd678RdzYtibd2TkwVZBHKs8ytPGxLM4r"; // 這一行是 NFT 該去哪裡找你的 MetaData
+    string public baseURI = "ipfs://QmPCx2zHKoi5UYZrcC2LYppAMRm1YXB4Tt5UbNfT36d5XK"; // 這一行是 NFT 該去哪裡找你的 MetaData
     bool public paused = false; // 可以拿來暫停或者開啟 Mint
     uint256 public cost = 0.000001 ether; // Mint 價格
     uint256 public maxSupply = 16; // 只有 個 NFT
     uint256 public maxMintAmount = 3; // 一次最多只能 Mint 一個
     
-    constructor() ERC721("ShopCoinT1", "SCT1") payable{    
+    constructor() ERC721("ShopNftT1", "SNT1") payable{    
 	}
 
     function mint(uint256 _mintAmount) public payable {
@@ -27,11 +27,11 @@ contract ShopNFT is ERC721Enumerable, Ownable{
         require(_mintAmount > 0); // 每次必須挖超過 0 個
         require(_mintAmount <= maxMintAmount); // 挖的數量不可以大於每次最大挖掘數量
         //require(supply + _mintAmount <= maxSupply);
-            // 挖的數量和當前發行量加起來，不可以超過最大總發行量
+        // 挖的數量和當前發行量加起來，不可以超過最大總發行量
         require(cost * _mintAmount <= msg.value, "Ether value sent is not correct"); // Mint 的價格不可以少於我們訂定的價格
 
         for (uint256 i=0; i<_mintAmount; i++) { // tokenID 從 0 開始
-            uint256 mintIndex = _tokenIdCounter.current();
+            uint256 mintIndex = _tokenIdCounter.current() + 1;
             while(_exists(mintIndex)){
                 i++;
             }
