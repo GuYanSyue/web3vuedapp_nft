@@ -24,10 +24,10 @@ const maxSupply = ref(null as any)
       Get NFT !
     </h1>
     <div v-if="!account">
-      <P class="MsoNormal">
+      <P class="MsoNormal2">
         ～。酸辣粉 NFT。～
       </P>
-      <P class="MsoNormal">
+      <P class="MsoNormal2">
         點擊下方橙色按鈕連結錢包購買NFT
       </P><br>
       <p>Only for Metamask --Goerli network.</p>
@@ -37,7 +37,7 @@ const maxSupply = ref(null as any)
     </button>
 
     <div v-if="account" class="border shadow w-4/12 p-10 mt-10">
-      <img src="../assets/Noodle.jpg" class="img-mid border shadow p-1">
+      <img src="../assets/Bagesuanlafen.jpeg" class="img-mid border shadow p-1">
 
       <div class="box">
         <p class="tit1">

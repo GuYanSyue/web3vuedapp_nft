@@ -5,7 +5,7 @@ import { acceptHMRUpdate, defineStore } from 'pinia'
 
 // import { ref } from 'vue'
 import contractABI from '../artifacts/contracts/ShopNFT.sol/ShopNFT.json'
-const contractAddress = '0x229952d9F287f797C32A08E493Cba7231B9Ea648'
+const contractAddress = '0x75606DD7965D64fB1aec087DCB5595A3dc632baD'
 const Onlyowner = '0xc98e9c69119eb0b764b0d5dcbc1532de8bfc2d4f'
 
 // const Sig: number | ethers.utils.BytesLike | ethers.utils.Hexable = []

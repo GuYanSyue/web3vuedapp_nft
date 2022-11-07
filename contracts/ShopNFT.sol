@@ -12,10 +12,10 @@ contract ShopNFT is ERC721Enumerable, Ownable{
     
     address public Owner = 0xc98E9c69119eb0B764B0d5DCbC1532De8bfC2D4f;
     
-    string public baseURI = "ipfs://QmPCx2zHKoi5UYZrcC2LYppAMRm1YXB4Tt5UbNfT36d5XK"; // 這一行是 NFT 該去哪裡找你的 MetaData
+    string public baseURI = "ipfs://QmRXH8rh3T9GqmoddZgBTkYtPASmCBEpfKRLb8C1XmPy1X"; // 這一行是 NFT 該去哪裡找你的 MetaData
     bool public paused = false; // 可以拿來暫停或者開啟 Mint
     uint256 public cost = 0.000001 ether; // Mint 價格
-    uint256 public maxSupply = 16; // 只有 個 NFT
+    uint256 public maxSupply = 20; // 只有 個 NFT
     uint256 public maxMintAmount = 3; // 一次最多只能 Mint 一個
     
     constructor() ERC721("ShopNftT1", "SNT1") payable{    
