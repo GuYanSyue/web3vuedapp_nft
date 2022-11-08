@@ -476,41 +476,41 @@
   "index.html": [
     "/web3vuedapp_nft/assets/Bagesuanlafen.2fe8f3ef.jpeg"
   ],
-  "assets/app.fbd09852.js-unocss-hash.css": [
+  "assets/app.f8de803f.js-unocss-hash.css": [
     "/web3vuedapp_nft/assets/Bagesuanlafen.2fe8f3ef.jpeg"
   ],
   "../../../../@vite-plugin-pwa/virtual:pwa-register": [
-    "/web3vuedapp_nft/assets/virtual_pwa-register.9eb41942.js"
+    "/web3vuedapp_nft/assets/virtual_pwa-register.f59acb6e.js"
   ],
   "src/layouts/404.vue?vue&type=script&setup=true&lang.ts": [
-    "/web3vuedapp_nft/assets/404.57bb821f.js"
+    "/web3vuedapp_nft/assets/404.a192e984.js"
   ],
   "src/layouts/404.vue": [
-    "/web3vuedapp_nft/assets/404.57bb821f.js"
+    "/web3vuedapp_nft/assets/404.a192e984.js"
   ],
   "src/layouts/home.vue": [
-    "/web3vuedapp_nft/assets/home.c455566b.js"
+    "/web3vuedapp_nft/assets/home.b91b1b16.js"
   ],
   "src/pages/README.md": [
-    "/web3vuedapp_nft/assets/README.81d309d7.js"
+    "/web3vuedapp_nft/assets/README.cdedc682.js"
   ],
   "src/pages/about.md": [
-    "/web3vuedapp_nft/assets/about.ac8c8b3f.js"
+    "/web3vuedapp_nft/assets/about.d28480e0.js"
   ],
   "src/pages/[...all].vue?vue&type=script&setup=true&lang.ts": [
-    "/web3vuedapp_nft/assets/_...all_.3c484ee3.js"
+    "/web3vuedapp_nft/assets/_...all_.6e7a208b.js"
   ],
   "src/pages/[...all].vue": [
-    "/web3vuedapp_nft/assets/_...all_.3c484ee3.js"
+    "/web3vuedapp_nft/assets/_...all_.6e7a208b.js"
   ],
   "src/store/user.ts": [
-    "/web3vuedapp_nft/assets/_name_.626b1c65.js"
+    "/web3vuedapp_nft/assets/_name_.1d58fe9e.js"
   ],
   "src/pages/hi/[name].vue?vue&type=script&setup=true&lang.ts": [
-    "/web3vuedapp_nft/assets/_name_.626b1c65.js"
+    "/web3vuedapp_nft/assets/_name_.1d58fe9e.js"
   ],
   "src/pages/hi/[name].vue": [
-    "/web3vuedapp_nft/assets/_name_.626b1c65.js"
+    "/web3vuedapp_nft/assets/_name_.1d58fe9e.js"
   ],
   "node_modules/workbox-window/build/workbox-window.prod.es5.mjs": [
     "/web3vuedapp_nft/assets/workbox-window.prod.es5.d2780aeb.js"
