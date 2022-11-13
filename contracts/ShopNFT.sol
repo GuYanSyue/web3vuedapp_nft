@@ -12,7 +12,7 @@ contract ShopNFT is ERC721Enumerable, Ownable{
     
     address public Owner = 0xc98E9c69119eb0B764B0d5DCbC1532De8bfC2D4f;
     
-    string public baseURI = "ipfs://QmRXH8rh3T9GqmoddZgBTkYtPASmCBEpfKRLb8C1XmPy1X"; // 這一行是 NFT 該去哪裡找你的 MetaData
+    string public baseURI = "ipfs://QmWoLpHY4khGEnNr8AUop1nDzgNqihU35E8JoeBpD6tPRU"; // 這一行是 NFT 該去哪裡找你的 MetaData
     bool public paused = false; // 可以拿來暫停或者開啟 Mint
     uint256 public cost = 0.000001 ether; // Mint 價格
     uint256 public maxSupply = 20; // 只有 個 NFT
@@ -54,7 +54,7 @@ contract ShopNFT is ERC721Enumerable, Ownable{
     }
 
     // 取得這個持有者有多少 NFT
-    function walletOfOwner(address _owner) public view returns (uint256[] memory) {
+    function walletOfOwner(address _owner) external view returns (uint256[] memory) {
         uint256 ownerTokenCount = balanceOf(_owner);
         uint256[] memory tokenIds = new uint256[](ownerTokenCount);
         for (uint256 i; i < ownerTokenCount; i++) {
