@@ -26,7 +26,7 @@ const uri = ref(null as any)
     </h1>
     <div v-if="!account">
       <P class="MsoNormal">
-        ～。酸辣粉 NFT。～
+        ～～。酸辣粉 NFT。～～
       </P>
       <P class="MsoNormal">
         點擊下方橙色按鈕連結錢包購買NFT
@@ -73,9 +73,10 @@ const uri = ref(null as any)
         </p>
         <input
           v-model.number="amountInput"
+          placeholder="在此輸入購買數量"
           type="number"
           :style="{ width: '100%' }"
-          name="NFTBookInfo"
+          name="Mint"
           class="py-4 px-4 shadow border rounded"
           maxlength="1"
         >
@@ -108,7 +109,7 @@ const uri = ref(null as any)
           v-model.number="maxMintAmount"
           type="number"
           :style="{ width: '100%' }"
-          name="newCost_ether"
+          name="SetmaxMintAmount"
           class="py-4 px-4 shadow border rounded"
           maxlength="10"
         >
@@ -118,8 +119,9 @@ const uri = ref(null as any)
 
         <input
           v-model.number="newCost_ether"
+          placeholder="單位: ether"
           :style="{ width: '100%' }"
-          name="newCost_ether"
+          name="SetCost"
           class="py-4 px-4 shadow border rounded"
           maxlength="10"
         >
@@ -130,7 +132,7 @@ const uri = ref(null as any)
         <input
           v-model.number="maxSupply"
           :style="{ width: '100%' }"
-          name="newCost_ether"
+          name="SetMaxSupply"
           class="py-4 px-4 shadow border rounded"
           maxlength="10"
         >
@@ -141,9 +143,10 @@ const uri = ref(null as any)
 
         <input
           v-model="uri"
+          placeholder="ipfs://"
           :style="{ width: '100%' }"
-          name="newCost_ether"
-          class="py-4 px-4 shadow border rounded b-color"
+          name="SetBaseURI"
+          class="py-4 px-4 shadow border rounded"
           maxlength="53"
         >
         <button class="w-1/1 bg-slate-500 rounded p-4 b-color" @click="setBaseURI(uri)">
