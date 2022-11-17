@@ -30,7 +30,7 @@ export const useCryptoStore = defineStore('user', () => {
   const info = ref(0)
   const showBalance = ref(null)
   const Account = ref('123')
-  const sum = ref(0)
+  const sum = ref(0) // walletOfOwner
 
   async function getBalance() {
     setLoader(true)
@@ -160,6 +160,7 @@ export const useCryptoStore = defineStore('user', () => {
         showTokenIds.value = mintTxn.toString()
 
         sum.value = mintTxn.length
+
         showMaxMintAmount.value = await ShopPortalContract.maxMintAmount()
 
         console.log('Setting....', mintTxn.hash)

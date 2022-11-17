@@ -9,7 +9,7 @@ import crypto_, { useCryptoStore } from '../store/crypto'
 // import crypto_ from '../store/user'
 
 const defineStore = useCryptoStore()
-const { getBalance, viewInfo, mint, connectWallet, withdraw, pause, setBaseURI, setmaxMintAmount, setCost, setMaxSupply } = useCryptoStore()
+const { walletOfOwner, getBalance, viewInfo, mint, connectWallet, withdraw, pause, setBaseURI, setmaxMintAmount, setCost, setMaxSupply } = useCryptoStore()
 const { showMaxMintAmount, sum, account, showBalance, showPaused, showURI, info, showSupply, showCost } = storeToRefs(defineStore)
 
 const amountInput = ref(null as any)
@@ -38,7 +38,7 @@ const uri = ref(null as any)
     </button>
 
     <div v-if="account" class="outsidebox">
-      <img src="../assets/Bagesuanlafen.jpeg" class="img-mid border shadow p-1">
+      <img src="../assets/NFT_Bagesuanlafen-ChanJi.png" class="img-mid border shadow p-1">
 
       <div class="box2">
         <p class="tit1">
@@ -46,6 +46,9 @@ const uri = ref(null as any)
         </p><p> &emsp;</p>
 
         <p class="MsoNormal" style="font-size: 1.3rem;">您持有本店NFT數量為:&nbsp;{{ sum }}&nbsp;個</p><p> &emsp;</p>
+        <!-- <button class=" bg-yellow-700 rounded b-color" @click="walletOfOwner(account)">
+          刷新擁有的NFT數量
+        </button><br><p> &emsp;</p> -->
 
         <button v-if="info === 0" class=" bg-yellow-600 rounded b-color" @click="viewInfo()">
           點我查看NFT資訊
@@ -62,11 +65,6 @@ const uri = ref(null as any)
           </button>
         </div>
         <p> &emsp;</p>
-
-        <!-- <p @click="walletOfOwner()">
-          查看擁有的nft數量
-        </p>
-        <p>{{ showTokenIds }}</p> -->
 
         <p class="MsoNormal" style="font-size: 1.3rem;">
           <br>請輸入購買數量（最多{{ showMaxMintAmount }}個）&emsp;<br>
