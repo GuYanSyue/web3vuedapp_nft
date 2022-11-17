@@ -38,7 +38,7 @@ const uri = ref(null as any)
     </button>
 
     <div v-if="account" class="outsidebox">
-      <img src="../assets/NFT_Bagesuanlafen-ChanJi.png" class="img-mid border shadow p-1">
+      <img src="../assets/浮水-NFT_Bagesuanlafen-ChanJi.png" class="img-mid border shadow p-1">
 
       <div class="box2">
         <p class="tit1">
